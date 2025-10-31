@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+
+
 class Navbar extends StatelessWidget {
   const Navbar({super.key});
 
@@ -7,14 +9,22 @@ class Navbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
+        // Quita cualquier padding del ListView
+        padding: EdgeInsets.zero, 
         children: [
           UserAccountsDrawerHeader(
-            accountName: Text("Alex Zaruma"),
-            accountEmail: Text("arszaruma@yavirac.edu.ec"),
-            currentAccountPicture: CircleAvatar(
-              child: ClipOval(child: Image.asset("images/hombre.jpg")),
+            accountName: const Text("Alex Zaruma"),
+            accountEmail: const Text("arszaruma@yavirac.edu.ec"),
+            currentAccountPicture: GestureDetector(
+              onTap: () {
+                Navigator.pop(context); // Cierra el drawer
+                Navigator.pushReplacementNamed(context, '/perfil'); 
+              },
+              child: const CircleAvatar(
+                child: ClipOval(child: Image(image: AssetImage("images/hombre.jpg"))),
+              ),
             ),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.amber,
               image: DecorationImage(
                 image: AssetImage("images/pared.jpg"),
@@ -23,29 +33,52 @@ class Navbar extends StatelessWidget {
             ), // BoxDecoration
           ),
           ListTile(
-            leading: Icon(Icons.file_upload),
-            title: Text("Inicio"),
-            onTap: () => print("Inicial proceso"),
+            leading: const Icon(Icons.home),
+            title: const Text("Inicio"),
+            onTap: () {
+              Navigator.pop(context); // Cierra el drawer
+              Navigator.pushReplacementNamed(context, '/inicio');
+            },
           ),
           ListTile(
-            leading: Icon(Icons.share),
-            title: Text("Buscar"),
-            onTap: () => print("Buscar archivo"),
+            leading: const Icon(Icons.search),
+            title: const Text("Buscar"),
+            onTap: () {
+              Navigator.pop(context); // Cierra el drawer
+              Navigator.pushReplacementNamed(context, '/buscar');
+            },
           ),
           ListTile(
-            leading: Icon(Icons.notification_add),
-            title: Text("Notificacion"),
-            onTap: () => print("Notificaciones"),
+            leading: const Icon(Icons.notifications),
+            title: const Text("Notificacion"),
+            onTap: () {
+              Navigator.pop(context); // Cierra el drawer
+              Navigator.pushReplacementNamed(context, '/notificaciones');
+            },
           ),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text("Siguiente"),
-            onTap: () => print("Inicial proceso"),
+            leading: const Icon(Icons.settings),
+            title: const Text("Ajustes"),
+            onTap: () {
+               Navigator.pop(context); // Cierra el drawer
+              Navigator.pushReplacementNamed(context, '/ajustes');
+            },
           ),
           ListTile(
-            leading: Icon(Icons.file_upload),
-            title: Text("Inicio"),
-            onTap: () => print("Inicial proceso"),
+            leading: const Icon(Icons.account_circle),
+            title: const Text("Perfil"),
+            onTap: () {
+               Navigator.pop(context); 
+              Navigator.pushReplacementNamed(context, '/perfil');
+            },
+          ),
+          const Divider(), // Un separador visual
+          ListTile(
+            leading: const Icon(Icons.exit_to_app),
+            title: const Text("Salir"),
+            onTap: () {
+              Navigator.pop(context); // Solo cierra el drawer
+            },
           ),
         ],
       ),
